@@ -10,10 +10,8 @@ RUN apt-get update -y && \
     apt-get clean all && \
     rm -rf /var/lib/apt/lists/* && \
     chmod +x /entry.sh && \
-    mkdir /zones && \
     groupadd --gid ${GID} dns && \
     useradd --gid ${GID} --uid ${UID} dns && \
-    chown -R dns: /zones && \
     chown -R dns: /etc/unbound
 
 EXPOSE 53
