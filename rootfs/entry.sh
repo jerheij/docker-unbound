@@ -2,6 +2,23 @@
 
 rm -vf /etc/unbound/unbound.conf.d/*.conf
 
+if [[ -n $FORWARD_DNS_2 ]]
+then
+  ForwardDNSConf="    forward-addr: ${FORWARD_DNS_2}"
+fi
+
+if [[ -n $FORWARD_DNS_3 ]]
+then
+  ForwardDNSConf="${ForwardDNSConf}
+forward-addr: ${FORWARD_DNS_3}"
+fi
+
+if [[ -n $FORWARD_DNS_4 ]]
+then
+  ForwardDNSConf="${ForwardDNSConf}
+forward-addr: ${FORWARD_DNS_4}"
+fi
+
 cat > /etc/unbound/unbound.conf.d/server.conf<< EOF
 server:
     username: "unbound"
@@ -11,7 +28,7 @@ server:
     qname-minimisation: yes
 
     interface: ${IP}
-    do-ip6: no
+    do-ip6: ${IPv6}
 
     do-daemonize: no
     use-systemd: no
@@ -23,7 +40,7 @@ server:
 forward-zone:
     name: "."
     forward-addr: ${FORWARD_DNS_1}
-    forward-addr: ${FORWARD_DNS_2}
+${ForwardDNSConf}
 EOF
 
 if [ ! -d /zones ]; then
