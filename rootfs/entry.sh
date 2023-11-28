@@ -26,6 +26,11 @@ forward-zone:
     forward-addr: ${FORWARD_DNS_2}
 EOF
 
+if [ ! -d /zones ]; then
+  mkdir -v /zones
+  chown -vR dns: /zones
+fi
+
 /usr/sbin/unbound-checkconf
 
 exec "$@"
