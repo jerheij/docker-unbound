@@ -65,7 +65,7 @@ steps:
       cmd:
         from_secret: GAUNT_INFRA
     when:
-      status: [ success ]s
+      status: [ success ]
       branch:
         - stable
 
