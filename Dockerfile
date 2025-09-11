@@ -1,12 +1,12 @@
 FROM ubuntu:jammy
 
-ENV UID=1100 GID=1100 IP=0.0.0.0 FORWARD_DNS_1=1.1.1.1 IPv6=no
+ENV UID=1100 GID=1100 IP=0.0.0.0 FORWARD_DNS_1=1.1.1.1 IPv6=no TLS=false
 
 COPY rootfs /
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    apt-get install -y unbound dnsutils && \
+    apt-get install -y unbound dnsutils ca-certificates && \
     apt-get clean all && \
     rm -rf /var/lib/apt/lists/* && \
     chmod +x /entry.sh && \
