@@ -46,6 +46,7 @@ steps:
       event:
         - cron
         - push
+        - pull_request
       branch:
         - stable
 
