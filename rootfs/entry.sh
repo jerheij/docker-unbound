@@ -39,6 +39,7 @@ server:
     use-systemd: no
     use-syslog: no
     access-control: 0.0.0.0/0 allow
+    log-queries: yes
 
     tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
 
